@@ -3,7 +3,7 @@ FROM openjdk:11-jdk
 CMD ["groovysh"]
 
 ENV GROOVY_HOME /opt/groovy
-ENV GROOVY_VERSION 3.0.0-alpha-2
+ENV GROOVY_VERSION 3.0.0-alpha-3
 
 RUN set -o errexit -o nounset \
     && echo "Downloading Groovy" \
