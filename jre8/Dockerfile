@@ -6,6 +6,12 @@ ENV GROOVY_HOME /opt/groovy
 ENV GROOVY_VERSION 2.5.5
 
 RUN set -o errexit -o nounset \
+    && echo "Installing Jansi native" \
+    && apt-get update && apt-get install --yes --no-install-recommends \
+        libjansi-java \
+        libjansi-native-java \
+    && rm -rf /var/lib/apt/lists/* \
+    \
     && echo "Downloading Groovy" \
     && wget --no-verbose --output-document=groovy.zip "https://dist.apache.org/repos/dist/release/groovy/${GROOVY_VERSION}/distribution/apache-groovy-binary-${GROOVY_VERSION}.zip" \
     \

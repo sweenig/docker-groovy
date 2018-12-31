@@ -57,9 +57,6 @@ RUN set -o errexit -o nounset \
     && ln -s "${GROOVY_HOME}/bin/groovysh" /usr/bin/groovysh \
     && ln -s "${GROOVY_HOME}/bin/java2groovy" /usr/bin/java2groovy \
     \
-    && echo "Cleaning up build dependencies" \
-    && apk del .build-deps \
-    \
     && echo "Adding groovy user and group" \
     && addgroup -S -g 1000 groovy \
     && adduser -D -S -G groovy -u 1000 -s /bin/ash groovy \
@@ -67,7 +64,14 @@ RUN set -o errexit -o nounset \
     && chown -R groovy:groovy /home/groovy \
     \
     && echo "Symlinking root .groovy to groovy .groovy" \
-    && ln -s /home/groovy/.groovy /root/.groovy
+    && ln -s /home/groovy/.groovy /root/.groovy \
+    \
+    && echo "Installing Jansi native" \
+    && apk add --no-cache \
+        java-jansi-native \
+    \
+    && echo "Cleaning up build dependencies" \
+    && apk del .build-deps
 
 # Create Grapes volume
 USER groovy

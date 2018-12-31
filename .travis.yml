@@ -1,6 +1,9 @@
 language: bash
 services: docker
 
+os:
+  - linux-ppc64le
+
 env:
   - VERSION=jdk8
   - VERSION=jdk8 VARIANT=alpine
